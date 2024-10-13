@@ -24,13 +24,13 @@ def show_result():
 
     # Seleccionar la imagen correspondiente al clima
     if engine.result == "El clima es caluroso":
-        img = ImageTk.PhotoImage(Image.open("sun.png"))  # Imagen de sol
+        img = ImageTk.PhotoImage(Image.open("img/sun.jpg"))  # Imagen de sol
     elif engine.result == "El clima es frío":
-        img = ImageTk.PhotoImage(Image.open("cold.png"))  # Imagen de frío
+        img = ImageTk.PhotoImage(Image.open("img/cold.png"))  # Imagen de frío
     elif engine.result == "El clima es lluvioso":
-        img = ImageTk.PhotoImage(Image.open("rain.png"))  # Imagen de lluvia
+        img = ImageTk.PhotoImage(Image.open("img/rain.jpg"))  # Imagen de lluvia
     elif engine.result == "El clima es ventoso":
-        img = ImageTk.PhotoImage(Image.open("wind.png"))  # Imagen de viento
+        img = ImageTk.PhotoImage(Image.open("img/wind.jpeg"))  # Imagen de viento
     else:
         img = None
 
