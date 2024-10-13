@@ -11,7 +11,6 @@ root.geometry("400x300")
 # Inicializar el motor de inferencia
 engine = WeatherExpert()
 
-
 # Función para mostrar la ventana de resultado
 def show_result():
     result_window = tk.Toplevel(root)
@@ -31,8 +30,12 @@ def show_result():
         img = ImageTk.PhotoImage(Image.open("img/rain.jpg"))  # Imagen de lluvia
     elif engine.result == "El clima es ventoso":
         img = ImageTk.PhotoImage(Image.open("img/wind.jpeg"))  # Imagen de viento
-    else:
-        img = None
+    elif engine.result == "El clima es nublado":
+        img = ImageTk.PhotoImage(Image.open("img/cloudy.png"))  # Imagen de nublado
+    elif engine.result == "El clima es huracán":
+        img = ImageTk.PhotoImage(Image.open("img/hurricane.jpg"))  # Imagen de huracán
+    else:  # Clima extraño
+        img = ImageTk.PhotoImage(Image.open("img/unknown.png"))  # Imagen para clima extraño
 
     if img:
         img_label = tk.Label(result_window, image=img)
@@ -46,13 +49,20 @@ def show_result():
     regresar_button = tk.Button(result_window, text="Regresar", command=regresar)
     regresar_button.pack(pady=10)
 
-
 # Función para calcular el clima
 def calcular_clima():
     try:
         temp = float(temp_entry.get())
         hum = float(hum_entry.get())
         wind = float(wind_entry.get())
+
+        if hum > 100:
+            messagebox.showerror("Error", "La humedad no puede ser mayor al 100%")
+            return
+
+        if not (wind >= 0):  # Verificar que la humedad esté en el rango de 0 a 100
+            messagebox.showerror("Error", "La velocidad del viento no puede ser negativa")
+            return
 
         # Declarar los hechos en el motor de inferencia
         engine.reset()
@@ -63,7 +73,6 @@ def calcular_clima():
 
     except ValueError:
         messagebox.showerror("Error", "Por favor ingrese valores numéricos válidos")
-
 
 # Etiquetas y entradas
 temp_label = tk.Label(root, text="Temperatura (°C):")
