@@ -21,26 +21,31 @@ def show_result():
     clima_label = tk.Label(result_window, text=engine.result, font=("Arial", 14))
     clima_label.pack(pady=20)
 
+    image_width = 200
+    image_height = 200
+
     # Seleccionar la imagen correspondiente al clima
     if engine.result == "El clima es caluroso":
-        img = ImageTk.PhotoImage(Image.open("img/sun.jpg"))  # Imagen de sol
+        img = Image.open("img/sun.jpg").resize((image_width, image_height), Image.LANCZOS)  # Imagen de sol
     elif engine.result == "El clima es frío":
-        img = ImageTk.PhotoImage(Image.open("img/cold.png"))  # Imagen de frío
+        img = Image.open("img/cold.png").resize((image_width, image_height), Image.LANCZOS)  # Imagen de frío
     elif engine.result == "El clima es lluvioso":
-        img = ImageTk.PhotoImage(Image.open("img/rain.jpg"))  # Imagen de lluvia
+        img = Image.open("img/rain.jpg").resize((image_width, image_height), Image.LANCZOS)  # Imagen de lluvia
     elif engine.result == "El clima es ventoso":
-        img = ImageTk.PhotoImage(Image.open("img/wind.jpeg"))  # Imagen de viento
+        img = Image.open("img/wind.jpeg").resize((image_width, image_height), Image.LANCZOS)  # Imagen de viento
     elif engine.result == "El clima es nublado":
-        img = ImageTk.PhotoImage(Image.open("img/cloudy.png"))  # Imagen de nublado
+        img = Image.open("img/cloudy.png").resize((image_width, image_height), Image.LANCZOS)  # Imagen de nublado
     elif engine.result == "El clima es huracán":
-        img = ImageTk.PhotoImage(Image.open("img/hurricane.jpg"))  # Imagen de huracán
+        img = Image.open("img/hurricane.jpg").resize((image_width, image_height), Image.LANCZOS)  # Imagen de huracán
     else:  # Clima extraño
-        img = ImageTk.PhotoImage(Image.open("img/unknown.png"))  # Imagen para clima extraño
+        img = Image.open("img/unknown.png").resize((image_width, image_height), Image.LANCZOS)  # Imagen para clima extraño
 
-    if img:
-        img_label = tk.Label(result_window, image=img)
-        img_label.image = img  # Necesario para que la imagen no sea recolectada por el garbage collector
-        img_label.pack()
+    img = ImageTk.PhotoImage(img)
+
+    # Mostrar la imagen en la ventana
+    img_label = tk.Label(result_window, image=img)
+    img_label.image = img  # Necesario para que la imagen no sea recolectada por el garbage collector
+    img_label.pack()
 
     # Botón para regresar a la ventana principal
     def regresar():

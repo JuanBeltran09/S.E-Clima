@@ -20,7 +20,7 @@ class WeatherExpert(KnowledgeEngine):
     def nublado(self):
         self.result = "El clima es nublado"
 
-    @Rule(Weather(temperature=P(lambda t: t > 20), humidity=P(lambda h: h > 80), wind_speed=P(lambda w: w > 100)))
+    @Rule(Weather(temperature=P(lambda t: t > 20 and t < 30), humidity=P(lambda h: h > 80), wind_speed=P(lambda w: w > 100)))
     def huracan(self):
         self.result = "El clima es huracán"
 
